@@ -27,18 +27,16 @@ def match_in_order(text, match):
 @app.route('/assistant', methods=['POST'])
 def assistant():
     json = request.get_json()
-    text = json['queryResult']['queryText']
-    if text == "GOOGLE_ASSISTANT_WELCOME":
-        return send_text("Hello! What can I help you with?")
-    if "hello there" in text.lower():
-        return send_text("General Kenobi! You are a bold one!")
-    if match_in_order(text, "how long until night"):
+    intent = json['queryResult']['intent']
+    if intent == 'eidolon-time':
         minutes, seconds = get_next_timestamp()
         if minutes > 50:
-            return send_text("It's {} minutes and {} seconds until night on the Plains.".format(minutes, seconds))
+            response = ("It's {} minutes and {} seconds until night on the Plains.".format(minutes, seconds))
         else:
-            return send_text("It's {} minutes and {} seconds until morning on the Plains.".format(minutes, seconds))
-    return send_text("I'm sorry, not sure what you mean by that.")
+            response = ("It's {} minutes and {} seconds until morning on the Plains.".format(minutes, seconds))
+    else:
+        response = ("Sorry, I'm not sure what you mean by that.")
+    return send_text(response)
 
 if __name__ == '__main__':
     app.run()
