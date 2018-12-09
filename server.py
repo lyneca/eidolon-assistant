@@ -31,9 +31,14 @@ def assistant():
     if intent == 'eidolon-time':
         minutes, seconds = get_next_timestamp()
         if minutes > 50:
-            response = "It's {} minutes and {} seconds until night on the Plains.".format(minutes, seconds)
+            if minutes > 60:
+                response = "It's one hour, {} minutes and {} seconds until night on the Plains.".format(minutes - 60, seconds)
+            else:
+                response = "It's {} minutes and {} seconds until night on the Plains.".format(minutes, seconds)
         else:
             response = "It's {} minutes and {} seconds until morning on the Plains.".format(minutes, seconds)
+    elif intent == 'alerts':
+        response = "I'm not ready to do alerts just yet."
     else:
         response = "Sorry, I'm not sure what you mean by that."
     return send_text(response)
