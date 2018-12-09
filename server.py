@@ -28,14 +28,15 @@ def match_in_order(text, match):
 def assistant():
     json = request.get_json()
     intent = json['queryResult']['intent']
+    print(intent)
     if intent == 'eidolon-time':
         minutes, seconds = get_next_timestamp()
         if minutes > 50:
-            response = ("It's {} minutes and {} seconds until night on the Plains.".format(minutes, seconds))
+            response = "It's {} minutes and {} seconds until night on the Plains.".format(minutes, seconds)
         else:
-            response = ("It's {} minutes and {} seconds until morning on the Plains.".format(minutes, seconds))
+            response = "It's {} minutes and {} seconds until morning on the Plains.".format(minutes, seconds)
     else:
-        response = ("Sorry, I'm not sure what you mean by that.")
+        response = "Sorry, I'm not sure what you mean by that."
     return send_text(response)
 
 if __name__ == '__main__':
