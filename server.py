@@ -12,7 +12,7 @@ def time_until(ts):
 
 def get_next_timestamp():
     j = req.get('http://content.warframe.com/dynamic/worldState.php').json()
-    seconds = time_until(int(get_expiry(j))) / 60
+    seconds = time_until(int(get_expiry(j)))
     return (seconds // 60, seconds % 60)
 
 def send_text(string):
@@ -33,7 +33,11 @@ def assistant():
     if "hello there" in text.lower():
         return send_text("General Kenobi! You are a bold one!")
     if match_in_order(text, "how long until night"):
-        return send_text("It's {} minutes and {} seconds until day time.".format(*get_next_timestamp()))
+        minutes, seconds = get_next_timestamp()
+        if minutes > 50:
+            return send_text("It's {} minutes and {} seconds until night on the Plains.".format(minutes, seconds))
+        else:
+            return send_text("It's {} minutes and {} seconds until morning on the Plains.".format(minutes, seconds))
     return send_text("I'm sorry, not sure what you mean by that.")
 
 if __name__ == '__main__':
