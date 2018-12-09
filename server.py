@@ -13,7 +13,7 @@ def assistant():
     if text == "GOOGLE_ASSISTANT_WELCOME":
         return send_text("Hello! What can I help you with?")
     if "hello there" in text.lower():
-        return sendtext("General Kenobi! You are a bold one!")
+        return send_text("General Kenobi! You are a bold one!")
     if "eidolon" in text.lower():
         return send_text("I'm not 100% sure, sorry.")
     return send_text("I'm sorry, not sure what you mean by that.")
