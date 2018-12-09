@@ -6,11 +6,11 @@ app = Flask(__name__)
 def assistant():
     json = request.get_json()
     text = json['queryResult']['queryText']
-    if text.lower().contains("hello there"):
+    if "hello there" in text.lower():
         return jsonify({
             "fulfillmentText": "General Kenobi! You are a bold one!"
             })
-    elif text.contains("eidolon"):
+    elif "eidolon" in text.lower():
         return jsonify({
             "fulfillmentText": "I'm not 100% sure, sorry."
             })
