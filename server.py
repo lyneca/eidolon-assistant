@@ -27,7 +27,7 @@ def match_in_order(text, match):
 @app.route('/assistant', methods=['POST'])
 def assistant():
     json = request.get_json()
-    intent = json['queryResult']['intent']['display-name']
+    intent = json['queryResult']['intent']['displayName']
     if intent == 'eidolon-time':
         minutes, seconds = get_next_timestamp()
         if minutes > 50:
