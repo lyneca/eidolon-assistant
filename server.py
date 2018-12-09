@@ -10,6 +10,8 @@ def assistant():
     json = request.get_json()
     text = json['queryResult']['queryText']
     print(json)
+    if text == "GOOGLE_ASSISTANT_WELCOME":
+        return send_text("Hello! What can I help you with?")
     if "hello there" in text.lower():
         return sendtext("General Kenobi! You are a bold one!")
     if "eidolon" in text.lower():
